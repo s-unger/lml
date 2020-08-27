@@ -36,18 +36,24 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 
 | VARIABLE/PARAMETER |
 |---|
-| String name <br> list of content |
+| String name <br> list of value |
 
 | ELEMENT |
 |---|
 | String name <br> String type <br> list of parameter |
 
-| CONTENT |
+| VALUE |
 |---|
 | String language <br> Bool approved <br> String text |
 
+### Elementdefinition
 
-### Applications
+So sieht ein Element aus:
+I think you should use an
+`<addr>` element here instead.
+
+
+## Applications
 The following applications are planned for the beginning:
 * Website output: Generates webcontent from LML
 * Creator tool: WYSIWYG-Editor for content creation
