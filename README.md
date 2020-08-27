@@ -15,3 +15,9 @@ LML is a new filetype only saving custom designed element-types, text, links and
 * Inter-Content-Links (automatically link keywords to web-pages).
 ## Implementation and roadmap
 The first attempt is to provide a first version of the markup language together with an interpreter. Elments are saved at this stage in custom code (PHP, JS). After the first stage, an element language will be introduced, and the interpreter could use it. At the end, there should be an optimized workflow for web content creation, independently from used CMS for all partizipants. If this is done, in future there could be a web browser based interpretation of LML, and some optimizations in speed.
+## Specification
+### Element types:
+* format-element: element without any content (hr, contactscript)
+* style-element: contains only other elements (splitview)
+* content-element: contains content data like strings and links (h1, h2, h3, text, bild, audio, embend)
+* intext-element: part of the content, changes how one part of the content looks (bold, italic)
