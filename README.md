@@ -21,3 +21,9 @@ The first attempt is to provide a first version of the markup language together 
 * style-element: contains only other elements (splitview)
 * content-element: contains content data like strings and links (h1, h2, h3, text, bild, audio, embend)
 * intext-element: part of the content, changes how one part of the content looks (bold, italic)
+### Tags:
+* \<!DOCTYPE lml 0.1> => Marks that the file is LML.
+* \<e-h3> \</e> OR \<e-hr/> => Marks an element-tag.
+* \<p-text> \</p> => Marks a parameter that is part of the element.
+* \<l-en-t-[Hello World]> => Saves the content of the parameter for the specific language. t or f is for the translator to see if the translation is already approved.
+* \<v-metatag> \</v> => Marks a variable which is not part of the content, but could be useful for the webpage, for example: meta-description, page title, keywords
