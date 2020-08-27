@@ -1,5 +1,5 @@
 # Language Markup Language
-Changing the way translations are handled in the web.
+Changing the way content and it's translations are handled in the web.
 ## This problems should be adressed by LML:
 * Better seperation between content and style.
     * Translators should be able to translate without knowing much about the style.
