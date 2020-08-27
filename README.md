@@ -27,3 +27,24 @@ The first attempt is to provide a first version of the markup language together 
 * \<p-text> \</p> => Marks a parameter that is part of the element.
 * \<l-en-t-[Hello World]> => Saves the content of the parameter for the specific language. t or f is for the translator to see if the translation is already approved.
 * \<v-metatag> \</v> => Marks a variable which is not part of the content, but could be useful for the webpage, for example: meta-description, page title, keywords
+### Data structure:
+LML is only a standard for saving (web)-content. The larger part is the data structure behind LML. This are the object definitions for the data, that is presented after the language interpretation, it should be object oriented if possible:
+
+| CONTENT |
+|---|
+| String name <br> list of elements <br> list of variables |
+
+| VARIABLE/PARAMETER |
+|---|
+| String name <br> list of content |
+
+| ELEMENT |
+|---|
+| String name <br> String type <br> list of parameter |
+
+| CONTENT |
+|---|
+| String language <br> Bool approved <br> String text |
+
+
+### Applications
