@@ -48,3 +48,7 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 
 
 ### Applications
+The following applications are planned for the beginning:
+* Website output: Generates webcontent from LML
+* Creator tool: WYSIWYG-Editor for content creation
+* Translate: Displays variables of two languages in a list for translators to work
