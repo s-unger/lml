@@ -49,8 +49,7 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 ### Elementdefinition
 
 So sieht ein Element aus:
-I think you should use an
-`<addr>` element here instead.
+`PreviousHTML$variable$MiddleHTML$variable$EndHTML`
 
 
 ## Applications
