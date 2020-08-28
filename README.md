@@ -39,7 +39,7 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 
 | CONTENT |
 |---|
-| String name <br> list of elements <br> list of variables |
+| list of elements <br> list of variables |
 
 | VARIABLE/PARAMETER |
 |---|
@@ -47,7 +47,7 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 
 | ELEMENT |
 |---|
-| String name <br> String type <br> list of parameter |
+| String name <br> list of parameter |
 
 | VALUE |
 |---|
