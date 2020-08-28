@@ -56,7 +56,7 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 ### Elementdefinition
 
 So sieht ein Element aus:
-`PreviousHTML$variable$MiddleHTML$variable$EndHTML`
+`elementtype:PreviousHTML$type-variable$MiddleHTML$type-variable$EndHTML`
 
 Linking content:
 Links are not easy to define, because the connection between the LML file and the content could be lost.
