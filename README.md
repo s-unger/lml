@@ -17,11 +17,6 @@ LML is a new filetype only saving custom designed element-types, text, links and
 ## Implementation and roadmap
 The first attempt is to provide a first version of the markup language together with an interpreter. Elments are saved at this stage in custom code (PHP, JS). After the first stage, an element language will be introduced, and the interpreter could use it. At the end, there should be an optimized workflow for web content creation, independently from used CMS for all partizipants. If this is done, in future there could be a web browser based interpretation of LML, and some optimizations in speed.
 ## Specification
-### Element types:
-* format-element: element without any content (hr, contactscript)
-* style-element: contains only other elements (splitview)
-* content-element: contains content data like strings and links (h1, h2, h3, text, bild, audio, embend)
-* intext-element: part of the content, changes how one part of the content looks (bold, italic)
 ### Tags:
 * \<!DOCTYPE lml 0.1> => Marks that the file is LML.
 * \<e-h3> \</e> OR \<e-hr/> => Marks an element-tag.
@@ -53,14 +48,23 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 |---|
 | String language <br> Bool approved <br> String text |
 
-### Elementdefinition
+### Element definition
 
-So sieht ein Element aus:
+This is how elements look like:
 `elementtype:PreviousHTML$type-variable$MiddleHTML$type-variable$EndHTML`
 
-Linking content:
-Links are not easy to define, because the connection between the LML file and the content could be lost.
-TODO: Links definieren
+The following element types are available:
+* format-element: element without any content (hr, contactscript)
+* style-element: contains only other elements (splitview)
+* content-element: contains content data like strings and links (h1, h2, h3, text, bild, audio, embend)
+* intext-element: part of the content, changes how one part of the content looks (bold, italic)
+
+The following variable types are available:
+* text: For text-based content
+* link: For references to multi-media and other content
+
+### Linking content:
+All internal links (other web content, media) part of the link variable type are given relative to a virtually defined root directory. This directory is defined with a prefix given to the renderer. All external links are given with full URL.
 
 ### Interpreter specification
 Interpreter consists of multiple parts:
@@ -68,7 +72,7 @@ Interpreter consists of multiple parts:
 Input: lml
 Output: data structure
 #### HTML renderer
-Input: data structure and elml
+Input: data structure, elml, virtual root dir, language 
 Output: html
 #### LML writer
 Input: data structure
