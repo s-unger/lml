@@ -12,7 +12,8 @@ LML is a new filetype only saving custom designed element-types, text, links and
 * LML markup language
 * Element definitions
 * Interpreter
-* Inter-Content-Links (automatically link keywords to web-pages).
+* Inter-content-links (automatically link keywords to web-pages).
+* Content transport containter: definition of folders and links to transfer multimedia content 
 ## Implementation and roadmap
 The first attempt is to provide a first version of the markup language together with an interpreter. Elments are saved at this stage in custom code (PHP, JS). After the first stage, an element language will be introduced, and the interpreter could use it. At the end, there should be an optimized workflow for web content creation, independently from used CMS for all partizipants. If this is done, in future there could be a web browser based interpretation of LML, and some optimizations in speed.
 ## Specification
