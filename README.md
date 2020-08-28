@@ -27,6 +27,9 @@ The first attempt is to provide a first version of the markup language together 
 * \<p-text> \</p> => Marks a parameter that is part of the element.
 * \<l-en-t-[Hello World]> => Saves the content of the parameter for the specific language. t or f is for the translator to see if the translation is already approved.
 * \<v-metatag> \</v> => Marks a variable which is not part of the content, but could be useful for the webpage, for example: meta-description, page title, keywords
+### File endings:
+* lml: file ending for content files
+* elml: file ending for element files
 ### Data structure:
 LML is only a standard for saving (web)-content. The larger part is the data structure behind LML. This are the object definitions for the data, that is presented after the language interpretation, it should be object oriented if possible:
 
@@ -55,12 +58,23 @@ Linking content:
 Links are not easy to define, because the connection between the LML file and the content could be lost.
 TODO: Links definieren
 
+### Interpreter specification
+Interpreter consists of multiple parts:
+#### LML reader
+Input: lml
+Output: data structure
+#### HTML renderer
+Input: data structure and elml
+Output: html
+#### LML writer
+Input: data structure
+Output:lml
 
 ## Applications
 The following applications are planned for the beginning:
-* Website output: Generates webcontent from LML
+* Website output: Generates webcontent from LML <br> Structure: lml reader => html renderer
 * Creator tool: WYSIWYG-Editor for content creation
-* Translate: Displays variables of two languages in a list for translators to work
+* Translate: Displays variables of two languages in a list for translators to work <br> Structure: lml reader => lml writer
 
 # Developer
 
