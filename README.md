@@ -28,6 +28,9 @@ The first attempt is to provide a first version of the markup language together 
 * \<p-text> \</p> => Marks a parameter that is part of the element.
 * \<l-en-t-[Hello World]> => Saves the content of the parameter for the specific language. t or f is for the translator to see if the translation is already approved.
 * \<v-metatag> \</v> => Marks a variable which is not part of the content, but could be useful for the webpage, for example: meta-description, page title, keywords
+### lml property definition
+* Content could also be either a link to or inline LML.
+* Text outside of tags is interpreted as a comment and shall not influence the output.
 ### File endings:
 * lml: file ending for content files
 * elml: file ending for element files
