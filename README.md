@@ -21,7 +21,7 @@ The first attempt is to provide a first version of the markup language together 
 * \<!DOCTYPE lml 0.1> => Marks that the file is LML.
 * \<e-h3> \</e> OR \<e-hr/> => Marks an element-tag.
 * \<p-text> \</p> => Marks a parameter that is part of the element.
-* \<l-en-t-[Hello World]> => Saves the content of the parameter for the specific language. t or f is for the translator to see if the translation is already approved.
+* \<l-en-t-[Hello World]> => Saves the content of the parameter for the specific language. t or f is for the translator to see if the translation is already approved. en stands for the language string. The language string could represent either a language only or a language and a region if needed. 0 stands for default.
 * \<v-metatag> \</v> => Marks a variable which is not part of the content, but could be useful for the webpage, for example: meta-description, page title, keywords
 ### lml property definition
 * Content could also be either a link to or inline LML.
