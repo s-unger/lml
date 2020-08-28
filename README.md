@@ -12,21 +12,20 @@ LML is a new filetype only saving custom designed element-types, text, links and
 * LML markup language
 * Element definitions
 * Interpreter
-* Inter-Content-Links (automatically link keywords to web-pages).
+* Inter-content-links (automatically link keywords to web-pages).
+* Content transport containter: definition of folders and links to transfer multimedia content 
 ## Implementation and roadmap
 The first attempt is to provide a first version of the markup language together with an interpreter. Elments are saved at this stage in custom code (PHP, JS). After the first stage, an element language will be introduced, and the interpreter could use it. At the end, there should be an optimized workflow for web content creation, independently from used CMS for all partizipants. If this is done, in future there could be a web browser based interpretation of LML, and some optimizations in speed.
 ## Specification
-### Element types:
-* format-element: element without any content (hr, contactscript)
-* style-element: contains only other elements (splitview)
-* content-element: contains content data like strings and links (h1, h2, h3, text, bild, audio, embend)
-* intext-element: part of the content, changes how one part of the content looks (bold, italic)
 ### Tags:
 * \<!DOCTYPE lml 0.1> => Marks that the file is LML.
 * \<e-h3> \</e> OR \<e-hr/> => Marks an element-tag.
 * \<p-text> \</p> => Marks a parameter that is part of the element.
-* \<l-en-t-[Hello World]> => Saves the content of the parameter for the specific language. t or f is for the translator to see if the translation is already approved.
+* \<l-en-t-[Hello World]> => Saves the content of the parameter for the specific language. t or f is for the translator to see if the translation is already approved. en stands for the language string. The language string could represent either a language only or a language and a region if needed. 0 stands for default.
 * \<v-metatag> \</v> => Marks a variable which is not part of the content, but could be useful for the webpage, for example: meta-description, page title, keywords
+### lml property definition
+* Content could also be either a link to or inline LML.
+* Text outside of tags is interpreted as a comment and shall not influence the output.
 ### File endings:
 * lml: file ending for content files
 * elml: file ending for element files
@@ -35,7 +34,7 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 
 | CONTENT |
 |---|
-| String name <br> list of elements <br> list of variables |
+| list of elements <br> list of variables |
 
 | VARIABLE/PARAMETER |
 |---|
@@ -43,20 +42,29 @@ LML is only a standard for saving (web)-content. The larger part is the data str
 
 | ELEMENT |
 |---|
-| String name <br> String type <br> list of parameter |
+| String name <br> list of parameter |
 
 | VALUE |
 |---|
 | String language <br> Bool approved <br> String text |
 
-### Elementdefinition
+### Element definition
 
-So sieht ein Element aus:
-`PreviousHTML$variable$MiddleHTML$variable$EndHTML`
+This is how elements look like:
+`elementtype:PreviousHTML$type-variable$MiddleHTML$type-variable$EndHTML`
 
-Linking content:
-Links are not easy to define, because the connection between the LML file and the content could be lost.
-TODO: Links definieren
+The following element types are available:
+* format-element: element without any content (hr, contactscript)
+* style-element: contains only other elements (splitview)
+* content-element: contains content data like strings and links (h1, h2, h3, text, bild, audio, embend)
+* intext-element: part of the content, changes how one part of the content looks (bold, italic)
+
+The following variable types are available:
+* text: For text-based content
+* link: For references to multi-media and other content
+
+### Linking content:
+All internal links (other web content, media) part of the link variable type are given relative to a virtually defined root directory. This directory is defined with a prefix given to the renderer. All external links are given with full URL.
 
 ### Interpreter specification
 Interpreter consists of multiple parts:
@@ -64,7 +72,7 @@ Interpreter consists of multiple parts:
 Input: lml
 Output: data structure
 #### HTML renderer
-Input: data structure and elml
+Input: data structure, elml, virtual root dir, language 
 Output: html
 #### LML writer
 Input: data structure
