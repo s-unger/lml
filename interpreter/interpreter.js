@@ -98,5 +98,5 @@ function reader (lml) {
     }
   }
   document.write("<br>"+ JSON.stringify(content));
-  //return datastructure;
+  return content;
 }
