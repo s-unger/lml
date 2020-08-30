@@ -1,8 +1,10 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 'On');
+reader("<!DOCTYPE lml 0.1> <e-h2> <p-text><l-de-t-[Fehler 404]><l-en-t-[Error 404]></p></e>");
 class content {
   private $elements;
-  private $parameter
+  private $parameter;
   
   function __construct() {
     $this->elements = [];
@@ -25,7 +27,7 @@ class content {
 
 class variable {
   private $name;
-  private $values
+  private $values;
   
   function __construct() {
     $this->name = "";
@@ -48,7 +50,7 @@ class variable {
 
 class parameter {
   private $name;
-  private $values
+  private $values;
   
   function __construct() {
     $this->name = "";
@@ -71,7 +73,7 @@ class parameter {
 
 class element {
   private $name;
-  private $parameters
+  private $parameters;
   
   function __construct() {
     $this->name = "";
@@ -104,7 +106,7 @@ class value {
   }
   
   function set_language($lang) {
-    $this->language, $lang);
+    $this->language = $lang;
   }
   function set_approved($approved) {
     $this->approved = $approved;
@@ -149,6 +151,7 @@ function reader ($lml) {
   //Generate datastructure from tag-list:
   //Tags have a minimum length of 2.
   //TODO: Check each tag, so the string-length is always in a good sharp (not too short).
+  /*
   var content = {elements:[], variables:[]}; //This is the content-object, which will be returned when populated with data.
   var element = {name:"", parameter:[]}; //This is the default element-object. Please only clone those objects.
   var parameter = {name:"", values:[]}; //This is the default parameter-object. Only clone.
@@ -198,6 +201,6 @@ function reader ($lml) {
     }
   }
   document.write("<br>"+ JSON.stringify(content));
-  return content;
+  return content;*/
 }
 ?>
