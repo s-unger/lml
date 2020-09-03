@@ -1,0 +1,49 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{url}
+\author{Sebastian Unger}
+\title{LML 0.1 Specification}
+\makeindex
+\setlength{\parindent}{0em}
+\setlength{\parskip}{0.5em}
+\begin{document}
+\maketitle
+Abstract: This specification defines the first pre-version of a new way of working with localized web- and multimedia content: the language markup language (LML). This version describes core elements of the language, that will help to archive the goals of the new markup language: separate web design, content creation and translation, as well as providing a way for content sharing and teamwork.
+\tableofcontents
+
+\section{Introduction}
+\begin{small}\textit{This section is non-normative.}\end{small}
+
+\subsection{Background}
+Until today the WWW core markup languages are HTML and CSS, assisted by script languages like JavaScript and PHP. Both markup languages were designed to separate content and design. The objective was to make modification of one part possible that do not affect the other one.
+
+However, things changed and web design is a large part of today's content creation. Companies, people and organisations with a need for attention require a special design representing their own positions and ideas. When going to mobile devices, more and more complex designs came up, needing special in-text markers and containers to tell which element should be styled.
+
+This led to a linking process between HTML and CSS. Massive use of DIVs and Classes made it impossible, that each file stands for itself. This made working procedures with content more complicated. Formerly easy processes like translating, sharing and archiving now need to consider the design. Also design changes need a propagation to all content files, which is currently handled by large script-work.
+
+LML should change this situation and bring back content files, that are decoupled from design. This should make life easier for all people involved in web content creation and management.
+
+\subsection{Scope}
+This specification does only specify the semantic level of the markup language, as well as interpretation procedures and the connection to existing web technologies. It does not cover implementation details, hardware specifications and software systems.
+
+\subsection{Suggested to read}
+
+\begin{itemize}
+\item HTML 5.2. W3C Recommendation, 14 December 2017 - \url{https://www.w3.org/TR/html52/}
+\item CSS Snapshot 2018, W3C Working Group Note, 22 January 2019 - \url{https://www.w3.org/TR/CSS/}
+\item UTF-8, a transformation format of ISO 10646, November 2003 - \url{https://tools.ietf.org/html/rfc3629}
+\end{itemize}
+
+\subsection{How to read this specification}
+
+\section{Basics}
+In this section the specification describes the basic requirements and knowledge about LML. This is normative, so the described wording, references and implementations should be followed in any implementation.
+
+\subsection{Terminology}
+\begin{itemize}
+\item Language markup language (LML): This term has two meanings: the first is only about the markup language itself (syntax and interpretation), the second is about the whole topic described in this specification.
+\item Element definition, ELML: This refers to the part of LML which describes how elements are represented in the markup.
+\item Exchange LML, XLML: This describes the file and method of packaging content encoded in LML.
+\end{itemize}
+\end{document}
