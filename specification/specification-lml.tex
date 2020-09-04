@@ -2,6 +2,20 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{url}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\usepackage{tcolorbox}
+
+\lstdefinestyle{base}{
+  language=C,
+  emptylines=1,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{red}]{@}{@},
+}
+
 \author{Sebastian Unger}
 \title{LML 0.1 Specification}
 \makeindex
@@ -37,6 +51,21 @@ This specification does only specify the semantic level of the markup language, 
 
 \subsection{How to read this specification}
 
+This specification has normative and non-normative parts. Non-normative parts are marked (like this one) at the beginning of the section with \begin{small}\textit{This section is non-normative}\end{small}. Non-normative parts do not follow any special rules, as they only add additional information. The following rules are followed in the normative section:
+
+Mandatory instructions are written like this, in normal paragraph style. They should be followed on any implementation.
+
+\begin{lstlisting}[frame=single,style=base]
+This box show the definition of semantic.
+Semantic in black shows which characters are fixed.
+@Red marks variable text and states its structure.
+\end{lstlisting}
+
+\begin{tcolorbox}
+\subsubsection*{Excursion box}
+This box shows larger examples or describes design decisions. The content is non-normative, the box content is only for transparency about the design process and for further information. The title of this box can differ to fit to the content.
+\end{tcolorbox}
+
 \section{Basics}
 In this section the specification describes the basic requirements and knowledge about LML. This is normative, so the described wording, references and implementations should be followed in any implementation.
 
@@ -46,4 +75,60 @@ In this section the specification describes the basic requirements and knowledge
 \item Element definition, ELML: This refers to the part of LML which describes how elements are represented in the markup.
 \item Exchange LML, XLML: This describes the file and method of packaging content encoded in LML.
 \end{itemize}
+
+\section{Semantic description}
+
+\subsection{Document}
+
+\subsubsection*{Charset}
+LML documents are plaintext. There are different ways to store them, and all of them are allowed as long as the internal structure is preserved. Because of internationality, the character encoding is fixed to UTF-8. There should be no reason to use any other charset for now, if things are changing, the default charset could change in future versions of LML.
+
+\begin{tcolorbox}
+\subsubsection*{Design decision}
+In HTML there is a special tag for declaring the charset. However, this was because HTML developed over time and needed to support old files, and browsers use this tag or complex algorithms to decide which encoding they will use. Now, in 2020, Unicode is the way to go as it is an international standard supporting nearly every letter existing. A new markup language today needs to make cuts to old technology for simplifying interpretation algorithms.
+\end{tcolorbox}
+
+\subsubsection*{Doctype}
+The doctype delivers information about the file. It shows the interpreter, that it's content is LML and what version should be used. This tag looks always the same and needs to be in the first 32 byte of a string. The interpreter should search within these 32 byte with any algorithm to determine the doctype if needed.
+\begin{lstlisting}[frame=single,style=base]
+<!DOCTYPE lml 0.1>
+\end{lstlisting}
+
+\subsection{Tags}
+
+Tags are written as less-than- and greater-than-signs (<, >) with defined content. The correct characters would be  U+003C at the beginning and U+003E at the end, like described in the UTF-8 table. There are three categories of tags:
+
+The first category, called paired tags, have an opening tag and a corresponding closing tag, which is marked with a slash, U+002F, after the < sign. Between the opening and closing tags, there is space for related tags. Only tags defined as related are allowed to be placed there.
+\begin{lstlisting}[frame=single,style=base]
+<@specified name and information@>
+  @related tags@
+</@specified name@>
+\end{lstlisting}
+
+A second tag category is stand-alone tags. They only could appear without ending tag, so they do not have a slash (/) anywhere except the content needs to have one. Mostly this are tags without the need of related tags.
+\begin{lstlisting}[frame=single,style=base]
+<@specified name and information@>
+\end{lstlisting}
+
+The third and last tag category are flexible tags, that could have related tags, but do not need them. They could be written in a short form, that requires a slash at the end.
+\begin{lstlisting}[frame=single,style=base]
+<@specified name and information@/>
+\end{lstlisting}
+
+\subsubsection*{Variable tag}
+The variable tag is part of the paired tags category and starts with v-, followed by any name.
+\begin{lstlisting}[frame=single,style=base]
+<v-@name@>
+  @some language tags@
+</v>
+\end{lstlisting}
+
+\begin{tcolorbox}
+\subsubsection*{Variable tag design and usage examples}
+The variable tag is designed for content meta-information, that could be interpreted by the page designer in any way outside of the content part, for example title, keywords and descriptions. Variable tags are also a way to store strings that are part of more complex structures, for example scripts and forms. The value can be accessed by name from the file, and be placed at any location, or used as a script input.
+
+\subsubsection*{Design decision}
+There are no specified names for the variables to prevent lml from getting linked with the design more than required. This happened with HTML tags, 
+\end{tcolorbox}
+
 \end{document}
