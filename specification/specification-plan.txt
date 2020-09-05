@@ -1,0 +1,32 @@
+LML Model
+-> Data format
+  LML
+    Tags
+      Doctyp
+      Element
+      Parameter
+      Language
+        Plaintext
+            allowed html subset
+        Inside-LML
+        Links
+      Variables
+  ELML
+    Elementline
+      elementdescription
+      elementtype
+        format-element
+        style-element
+        content-element
+      variable types
+-> File format
+  XLML package file
+  LML file
+  ELML file
+-> Data structure
+  Content
+  Variable
+  Parameter
+  Element
+  Value
+-> Interpretation and rendering

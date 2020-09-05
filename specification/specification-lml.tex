@@ -25,6 +25,7 @@
 \maketitle
 Abstract: This specification defines the first pre-version of a new way of working with localized web- and multimedia content: the language markup language (LML). This version describes core elements of the language, that will help to archive the goals of the new markup language: separate web design, content creation and translation, as well as providing a way for content sharing and teamwork.
 \tableofcontents
+\newpage
 
 \section{Introduction}
 \begin{small}\textit{This section is non-normative.}\end{small}
@@ -44,9 +45,10 @@ This specification does only specify the semantic level of the markup language, 
 \subsection{Suggested to read}
 
 \begin{itemize}
-\item HTML 5.2. W3C Recommendation, 14 December 2017 - \url{https://www.w3.org/TR/html52/}
-\item CSS Snapshot 2018, W3C Working Group Note, 22 January 2019 - \url{https://www.w3.org/TR/CSS/}
-\item UTF-8, a transformation format of ISO 10646, November 2003 - \url{https://tools.ietf.org/html/rfc3629}
+\item HTML 5.2. W3C Recommendation, 14 December 2017 - \url{www.w3.org/TR/html52/}
+\item CSS Snapshot 2018, W3C Working Group Note, 22 January 2019 - \url{www.w3.org/TR/CSS/}
+\item UTF-8, a transformation format of ISO 10646, November 2003 - \url{tools.ietf.org/html/rfc3629}
+\item ZIP File Format Specification, July 15 2020 - \url{pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT}
 \end{itemize}
 
 \subsection{How to read this specification}
@@ -68,25 +70,36 @@ This box shows larger examples or describes design decisions. The content is non
 
 \section{Basics}
 In this section the specification describes the basic requirements and knowledge about LML. This is normative, so the described wording, references and implementations should be followed in any implementation.
-
 \subsection{Terminology}
 \begin{itemize}
-\item Language markup language (LML): This term has two meanings: the first is only about the markup language itself (syntax and interpretation), the second is about the whole topic described in this specification.
-\item Element definition, ELML: This refers to the part of LML which describes how elements are represented in the markup.
-\item Exchange LML, XLML: This describes the file and method of packaging content encoded in LML.
+\item LML model: The LML model describes the whole topic about LML, defined in this document. It includes the data formats, file formats, data structures and the interpretation and rendering process.
+\item Data format: layout of stored or processed raw data, that is not already present in a data structure. There are two data formats available in the LML model: the LML data format and the ELML data format.
+\item File format: This defines the structure of stored files. There are three file formats part of the LML model: LML files, ELML files and XLML package files.
+\item Data structure: An object-oriented representation of LML for processing the data.
+\item Interpreter: The software that interprets LML and ELML files.
+\item Rendering: The process of generating HTML or other content from LML.
 \end{itemize}
 
-\section{Semantic description}
-
-\subsection{Document}
-
-\subsubsection*{Charset}
-LML documents are plaintext. There are different ways to store them, and all of them are allowed as long as the internal structure is preserved. Because of internationality, the character encoding is fixed to UTF-8. There should be no reason to use any other charset for now, if things are changing, the default charset could change in future versions of LML.
+\subsection{Character encoding}
+Because of internationality, the character encoding is fixed to UTF-8. There should be no reason to use any other charset for now, if recommended charset is changing, the default charset could be changed in future versions of LML.
 
 \begin{tcolorbox}
 \subsubsection*{Design decision}
 In HTML there is a special tag for declaring the charset. However, this was because HTML developed over time and needed to support old files, and browsers use this tag or complex algorithms to decide which encoding they will use. Now, in 2020, Unicode is the way to go as it is an international standard supporting nearly every letter existing. A new markup language today needs to make cuts to old technology for simplifying interpretation algorithms.
 \end{tcolorbox}
+
+\section{LML data format}
+
+\section{ELML data format}
+
+\section{File format}
+
+\section{Data structure}
+
+\section{Interpretation and rendering}
+
+\subsection{Document}
+
 
 \subsubsection*{Doctype}
 The doctype delivers information about the file. It shows the interpreter, that it's content is LML and what version should be used. This tag looks always the same and needs to be in the first 32 byte of a string. The interpreter should search within these 32 byte with any algorithm to determine the doctype if needed.
@@ -130,5 +143,15 @@ The variable tag is designed for content meta-information, that could be interpr
 \subsubsection*{Design decision}
 There are no specified names for the variables to prevent lml from getting linked with the design more than required. This happened with HTML tags, 
 \end{tcolorbox}
+
+\section{Interpretation and rendering}
+
+\section{Packaging and transport with XLML}
+
+This section defines XLML, a style made for transport, backup and archiving.
+
+\subsection{File and folder structure}
+
+XLML files follow the default ZIP file structure stated in the ZIP specification, but the file ending is not zip, but xlml.
 
 \end{document}
