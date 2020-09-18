@@ -37,6 +37,41 @@ Roadmap:
 * Going for standardisation and browser support
 * Optimisations
 ## Specification
+
+### Specification plan
+
+LML Model:
+* Data format
+  * LML
+    * Tags
+      * Doctyp
+      * Element
+      * Parameter
+      * Language
+        * Plaintext
+            * allowed html subset
+        * Inside-LML
+        * Links
+      * Variables
+  * ELML
+    * Elementline
+      * elementdescription
+      * elementtype
+        * format-element
+        * style-element
+        * content-element
+      * variable types
+* File format
+  * XLML package file
+  * LML file
+  * ELML file
+* Data structure
+  * Content
+  * Variable
+  * Parameter
+  * Element
+  * Value
+* Interpretation and rendering
 ### Tags:
 * \<!DOCTYPE lml 0.1> => Marks that the file is LML.
 * \<e-h3> \</e> OR \<e-hr/> => Marks an element-tag.
