@@ -100,3 +100,33 @@ function reader (lml) {
   document.write("<br>"+ JSON.stringify(content));
   return content;
 }
+//Input: elml-formattet string
+//Output: elml data structure
+function elemreader(elml) {
+  var elements = [];
+  var element = {name:"", content:""};
+  var array = elml.split("\n");
+  for (var i = 0; i < array.length; i++) {
+    console.log(array[i]);
+    if (array[i].charAt(0) == " " || array[i].charAt(0) == "\t") {
+      element.content = element.content+array[i];
+    } else {
+      if (element.name != "" && element.content != "") {
+        elements.push(element.clone());
+        element = {name:"", content:""};
+      }
+      var index = array[i].indexOf(":");  // Gets the first index where a colon occours
+      if (index == -1) {
+        throw "Missing seperator or wrong intent in elml file on line " + i;
+      } else {
+        element.name = array[i].substr(0, index); // Gets the first part (name)
+        element.content = array[i].substr(index + 1);  // Gets the text part (content)
+      }
+    }
+  }
+  if (element.name != "" && element.content != "") {
+    elements.push(element.clone());
+    element = {name:"", content:""};
+  }
+  return elements;
+}

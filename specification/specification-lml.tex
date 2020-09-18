@@ -23,7 +23,7 @@
 \setlength{\parskip}{0.5em}
 \begin{document}
 \maketitle
-Abstract: This specification defines the first pre-version of a new way of working with localized web- and multimedia content: the language markup language (LML). This version describes core elements of the language, that will help to archive the goals of the new markup language: separate web design, content creation and translation, as well as providing a way for content sharing and teamwork.
+Abstract: This specification defines the first pre-version of a new way of working with multi-language web- and multimedia content: the language markup language (LML). This version describes core elements of the language, that will help to archive the goals of the new markup language: separate web design, content creation and translation, as well as providing a way for content sharing and teamwork.
 \tableofcontents
 \newpage
 
@@ -53,7 +53,7 @@ This specification does only specify the semantic level of the markup language, 
 
 \subsection{How to read this specification}
 
-This specification has normative and non-normative parts. Non-normative parts are marked (like this one) at the beginning of the section with \begin{small}\textit{This section is non-normative}\end{small}. Non-normative parts do not follow any special rules, as they only add additional information. The following rules are followed in the normative section:
+This specification has normative and non-normative parts. Non-normative parts are marked (like this introduction-section) at the beginning of the section with \begin{small}\textit{This section is non-normative}\end{small}. Non-normative parts do not follow any special rules, as they only add additional information. The following rules are followed in the normative section:
 
 Mandatory instructions are written like this, in normal paragraph style. They should be followed on any implementation.
 
@@ -65,7 +65,7 @@ Semantic in black shows which characters are fixed.
 
 \begin{tcolorbox}
 \subsubsection*{Excursion box}
-This box shows larger examples or describes design decisions. The content is non-normative, the box content is only for transparency about the design process and for further information. The title of this box can differ to fit to the content.
+This box shows larger examples or describes design decisions. The content is non-normative, the box content is for transparency about the design process and for further information. The title of this box can differ to fit to the content.
 \end{tcolorbox}
 
 \section{Basics}
@@ -76,9 +76,11 @@ In this section the specification describes the basic requirements and knowledge
 \item Data format: layout of stored or processed raw data, that is not already present in a data structure. There are two data formats available in the LML model: the LML data format and the ELML data format.
 \item File format: This defines the structure of stored files. There are three file formats part of the LML model: LML files, ELML files and XLML package files.
 \item Data structure: An object-oriented representation of LML for processing the data.
-\item Interpreter: The software that interprets LML and ELML files.
-\item Rendering: The process of generating HTML or other content from LML.
+\item Interpreter: The software and process that interprets LML and ELML files.
+\item Rendering: The software and process of generating HTML or other content from LML.
+\item Content data: Data written in the content part of the tags, that describes the content information, as well as the metadata.
 \end{itemize}
+
 
 \subsection{Character encoding}
 Because of internationality, the character encoding is fixed to UTF-8. There should be no reason to use any other charset for now, if recommended charset is changing, the default charset could be changed in future versions of LML.
@@ -88,70 +90,58 @@ Because of internationality, the character encoding is fixed to UTF-8. There sho
 In HTML there is a special tag for declaring the charset. However, this was because HTML developed over time and needed to support old files, and browsers use this tag or complex algorithms to decide which encoding they will use. Now, in 2020, Unicode is the way to go as it is an international standard supporting nearly every letter existing. A new markup language today needs to make cuts to old technology for simplifying interpretation algorithms.
 \end{tcolorbox}
 
+\newpage
 \section{LML data format}
-
-\section{ELML data format}
-
-\section{File format}
-
-\section{Data structure}
-
-\section{Interpretation and rendering}
-
-\subsection{Document}
-
-
-\subsubsection*{Doctype}
-The doctype delivers information about the file. It shows the interpreter, that it's content is LML and what version should be used. This tag looks always the same and needs to be in the first 32 byte of a string. The interpreter should search within these 32 byte with any algorithm to determine the doctype if needed.
-\begin{lstlisting}[frame=single,style=base]
-<!DOCTYPE lml 0.1>
-\end{lstlisting}
+The LML data format describes the content that should be saved and displayed. It stores the content itself, references to multi media data, a marker for correctness and a hint to the corresponding design. The data is structured in tags.
 
 \subsection{Tags}
+Tags are written as less-than- and greater-than-signs (<, >) with defined content in between. The correct characters would be  U+003C at the beginning and U+003E at the end, like described in the UTF-8 table. The tags have a name stated in this specification and place for content data. Name and all content data fragments are divided with U+002D (-). There are three categories of tags:
 
-Tags are written as less-than- and greater-than-signs (<, >) with defined content. The correct characters would be  U+003C at the beginning and U+003E at the end, like described in the UTF-8 table. There are three categories of tags:
-
-The first category, called paired tags, have an opening tag and a corresponding closing tag, which is marked with a slash, U+002F, after the < sign. Between the opening and closing tags, there is space for related tags. Only tags defined as related are allowed to be placed there.
+The first category, called paired tags, have an opening tag and a corresponding closing tag, which is marked with a slash (/), U+002F, after the < sign. Between the opening and closing tags, there is space for related tags. Only tags defined as related and their related tags are allowed to be placed there.
 \begin{lstlisting}[frame=single,style=base]
-<@specified name and information@>
+<@specified name@-@content data@>
   @related tags@
 </@specified name@>
 \end{lstlisting}
 
-A second tag category is stand-alone tags. They only could appear without ending tag, so they do not have a slash (/) anywhere except the content needs to have one. Mostly this are tags without the need of related tags.
+A second tag category is stand-alone tags. They only could appear without ending tag, so they do not have a slash (/) anywhere except the content data needs to have one. Mostly this are tags that do not need related tags.
 \begin{lstlisting}[frame=single,style=base]
-<@specified name and information@>
+<@specified name@-@content data@>
 \end{lstlisting}
 
 The third and last tag category are flexible tags, that could have related tags, but do not need them. They could be written in a short form, that requires a slash at the end.
 \begin{lstlisting}[frame=single,style=base]
-<@specified name and information@/>
+<@specified name@-@content data@/>
+\end{lstlisting}
+
+\subsubsection*{Doctype}
+Doctype is a stand-alone-tag. The doctype delivers information about the LML structure. It shows the interpreter, that it's content is LML and what version should be used. This tag looks always the same and needs to be in the first 32 byte of the LML. The interpreter should search within these 32 byte with any algorithm to determine the doctype if needed.
+\begin{lstlisting}[frame=single,style=base]
+<!DOCTYPE lml 0.1>
 \end{lstlisting}
 
 \subsubsection*{Variable tag}
-The variable tag is part of the paired tags category and starts with v-, followed by any name.
+The variable tag is part of the paired tags category and starts with v- as the specified name, followed by any letter-combination as a name.
 \begin{lstlisting}[frame=single,style=base]
 <v-@name@>
   @some language tags@
 </v>
 \end{lstlisting}
-
-\begin{tcolorbox}
+\begin{tcolorbox}[parbox=false]
 \subsubsection*{Variable tag design and usage examples}
-The variable tag is designed for content meta-information, that could be interpreted by the page designer in any way outside of the content part, for example title, keywords and descriptions. Variable tags are also a way to store strings that are part of more complex structures, for example scripts and forms. The value can be accessed by name from the file, and be placed at any location, or used as a script input.
+The variable tag is designed for content meta-information, that could be interpreted by the page designer in any way outside of the content part, for example title, keywords and descriptions. Variable tags are also a way to store strings that are part of more complex structures, for example scripts and forms. The value can be accessed by name from the file, and be placed at any location, or used as a script input. Because of interchangeability the name should describe the purpose of the content.
 
-\subsubsection*{Design decision}
-There are no specified names for the variables to prevent lml from getting linked with the design more than required. This happened with HTML tags, 
+The possibility to use any name is still a huge downside of LML, because this leads to reworking the names inside the LML file if they are used with different designs. However, this specification does not state a list of binding names. The reason for this is, that in HTML the specified tag names like h1, h2, p and so on were misused for the design.
 \end{tcolorbox}
 
+
+\section{ELML data format}
+
+ELML data should follow this rules: The name of each element is at the beginning of the line. After the name there is a colon followed by the output content. This could contain any parameter names between @-symbols. If an @-symbol should be in the output, there should be no text between two @ (@@ -> @). If there is more space needed for the element definition, the content could be stretched to many more lines. by intending them either with tabs or spaces.
+
+\section{File formats}
+
+\section{Data structure}
+
 \section{Interpretation and rendering}
-
-\section{Packaging and transport with XLML}
-
-This section defines XLML, a style made for transport, backup and archiving.
-
-\subsection{File and folder structure}
-
-XLML files follow the default ZIP file structure stated in the ZIP specification, but the file ending is not zip, but xlml.
-
 \end{document}
