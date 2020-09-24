@@ -128,5 +128,10 @@ function elemreader(elml) {
     elements.push(element.clone());
     element = {name:"", content:""};
   }
+  alert(JSON.stringify(elements)); //TODO: remove test output.
   return elements;
+}
+
+function htmlrenderer() {
+  
 }

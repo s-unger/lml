@@ -120,8 +120,25 @@ Doctype is a stand-alone-tag. The doctype delivers information about the LML str
 <!DOCTYPE lml 0.1>
 \end{lstlisting}
 
+\subsubsection*{Element tag}
+The element tag is part of the paired tags, but can be reduced (flexible tag). Element tags start with e- followed by the name of the element.
+\begin{lstlisting}[frame=single,style=base]
+<e-@name@>
+  @some language tags@
+</e>
+\end{lstlisting}
+or
+\begin{lstlisting}[frame=single,style=base]
+<e-@name@/>
+\end{lstlisting}
+
+Here is a list of names, that could be chosen for the element name with a description how they might be interpreted. The description is not binding, the designer could choose to design the elements in any other way. Also, beside of this list, the designer could use own names for any other purpose. However, this is for compatibility reasons to reduce work for content transfer between designs.
+
+\begin{itemize}
+\item h1, h2, h3, h4:
+\end{itemize}
 \subsubsection*{Variable tag}
-The variable tag is part of the paired tags category and starts with v- as the specified name, followed by any letter-combination as a name.
+The variable tag is part of the paired tags category and starts with v- as the specified name, followed by any letter-combination as a name. The related tag for this is the language tag. The name can be freely chosen by the designer, content editors need to use those names (defined in ELML).
 \begin{lstlisting}[frame=single,style=base]
 <v-@name@>
   @some language tags@
@@ -131,7 +148,7 @@ The variable tag is part of the paired tags category and starts with v- as the s
 \subsubsection*{Variable tag design and usage examples}
 The variable tag is designed for content meta-information, that could be interpreted by the page designer in any way outside of the content part, for example title, keywords and descriptions. Variable tags are also a way to store strings that are part of more complex structures, for example scripts and forms. The value can be accessed by name from the file, and be placed at any location, or used as a script input. Because of interchangeability the name should describe the purpose of the content.
 
-The possibility to use any name is still a huge downside of LML, because this leads to reworking the names inside the LML file if they are used with different designs. However, this specification does not state a list of binding names. The reason for this is, that in HTML the specified tag names like h1, h2, p and so on were misused for the design.
+The possibility to use any name is still a huge downside of LML, because this leads to reworking the names inside the LML file if they are used with different designs. However, this specification does not state a list of binding names. The reason for this is, that in HTML the specified tag names like h1, h2, p and so on were misused for the design for many reasons. So when LML content is moved, the person responsible for the content, needs to fit it to the own design structure.
 \end{tcolorbox}
 
 

@@ -1,7 +1,12 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
+//TODO: Remove test implementation
 reader("<!DOCTYPE lml 0.1> <e-h2> <p-text><l-de-t-[Fehler 404]><l-en-t-[Error 404]></p></e>");
+elemreader('hr:<div id="hr">
+  </div>
+test:Hello World
+h2:<h2>$text$</h2>');
 class Content {
   private $elements;
   private $parameter;
@@ -91,6 +96,29 @@ class Element {
   }
   function get_name() {
     return $this->name;
+  }
+}
+
+class Renderelement {
+  private $name;
+  private $content;
+  
+  function __construct() {
+    $this->name = "";
+    $this->content = "";
+  }
+  
+  function set_name($name) {
+    $this->name = $name;
+  }
+  function set_content($content) {
+    $this->content = $content;
+  }
+  function get_name() {
+    return $this->name;
+  }
+  function get_content() {
+    return $this->content;
   }
 }
 
@@ -205,5 +233,37 @@ function reader ($lml) {
   echo ("<br><br>");
   print_r($content); //Test output. TODO: Remove later
   return $content;
+}
+
+//Input: elml-formattet string
+//Output: elml data structure
+function elemreader($elml) {
+  $elements = [];
+  $renderelement = new Renderelement();
+  $array = explode("\n", $elml);
+  for ($i = 0; $i < count($array); $i++) {
+    if (mb_substr($array[$i], 0, 1) == " " || mb_substr($array[$i], 0, 1) == "\t") {
+      $renderelement->set_content($renderelement->get_content().$array[$i]);
+    } else {
+      if ($renderelement->get_name() != "" && $renderelement->get_content() != "") {
+        array_push($elements, $renderelement);
+        $renderelement = new renderelement();
+      }
+      $index = strpos($array[$i],":");  // Gets the first index where a colon occours
+      if ($index == false) {
+        echo "Missing seperator or wrong intent in elml file on line ".$i;
+      } else {
+        $renderelement->set_name(mb_substr($array[$i], 0, $index)); // Gets the first part (name)
+        $renderelement->set_content(mb_substr($array[$i], $index + 1)); // Gets the text part (content)
+      }
+    }
+  }
+  if ($renderelement->get_name() != "" && $renderelement->get_content() != "") {
+    array_push($elements, $renderelement);
+    $renderelement = new renderelement();
+  }
+  echo "<br />Test<br />";
+  print_r($elements); //TODO: remove test output
+  return $elements;
 }
 ?>
